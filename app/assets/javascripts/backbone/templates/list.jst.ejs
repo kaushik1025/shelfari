@@ -1,0 +1,21 @@
+<a href="#/new" class="btn btn-primary">New</a>
+<hr />
+<table class="table striped">
+  <thead>
+    <tr>
+      <th>Book Title</th><th>Author</th><th>Title</th><th></th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% _.each(books, function(book) { %>
+      <tr>
+        <td><%= book.get('title') %></td>
+        <td><%= book.get('author') %></td>
+        <td><%= book.get('status') %></td>
+
+        <td><a class="btn" href="#/edit/<%= book.id %>">Edit</a></td>
+        <td><a class="btn btn-danger delete" href="#" data-id=<%= book.id%>>Delete</a></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
