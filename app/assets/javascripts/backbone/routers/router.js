@@ -13,7 +13,7 @@ $(function($){
       books.fetch({
         success: function (books) {
           var bookListView = new app.BookListView({collection:books});
-          bookListView.render();
+          bookListView.render({search: null});
         }
       })     
     },

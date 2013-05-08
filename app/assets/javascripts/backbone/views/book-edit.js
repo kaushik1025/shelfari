@@ -33,8 +33,20 @@ $(function($){
     el: '.page',
     template: JST["backbone/templates/edit"],
     events: {
-      'submit .edit-book-form': 'savebook'
+      'submit .edit-book-form': 'savebook',
+      'click .back': 'goback',
+      'click .search': 'searchbooks'
     },
+
+    goback: function(){
+      window.location.hash = "";
+    },
+
+    searchbooks: function(){
+      var searchstring = $("#searchinput").val();
+      console.log()
+    },
+
     savebook: function (ev) {
       var bookDetails = $(ev.currentTarget).serializeObject();
       var book = new app.Book();
@@ -46,15 +58,7 @@ $(function($){
       });
       return false;
     },
-/*    deletebook: function (ev) {
-      console.log("Delete");
-      var 
-      this.book.destroy({
-        success: function () {
-          window.location.hash = "";
-        }
-      })
-    },*/
+
     render: function (options) {
       console.log("Edit Render")
       var that = this;

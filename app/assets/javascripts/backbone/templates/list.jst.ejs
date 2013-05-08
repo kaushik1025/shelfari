@@ -1,13 +1,18 @@
-<a href="#/new" class="btn btn-primary">New</a>
-<div class='input-append' style="float:right;">
-    <input placeholder="Search..." />
-    <button class='btn add-on'>
-        <i class="icon-search"></i>
-    </button>
+<style>
+.control-group {
+  float: right;
+}
+</style>
+
+<a href="#/new" class="btn btn-primary btn-small"><i class="icon-white icon-plus-sign"></i> Add New Book</a>
+<!-- Search input-->
+<div class="control-group">
+  <div class="controls">
+    <input id="searchinput" name="searchinput" type="text" placeholder="search books.." class="input-xlarge search-query">
+    <button class="btn btn-success btn-small search">Go <i class="icon-white icon-thumbs-up"></i></button>
+
+  </div>
 </div>
- 
-
-
 <hr />
 <table class="table striped">
   <thead>
@@ -22,8 +27,8 @@
         <td><%= book.get('author') %></td>
         <td><%= book.get('status') %></td>
 
-        <td><a class="btn btn-succes0s" href="#/edit/<%= book.id %>">Edit</a></td>
-        <td><a class="btn btn-danger delete" href="#" data-id=<%= book.id%>>Delete</a></td>
+        <td><a class="btn btn-small" href="#/edit/<%= book.id %>">Edit</a></td>
+        <td><a href="#" class="btn btn-danger btn-small delete" data-id=<%= book.id%>>Delete</a></td>
       </tr>
     <% }); %>
   </tbody>
