@@ -1,4 +1,13 @@
 <a href="#/new" class="btn btn-primary">New</a>
+<div class='input-append' style="float:right;">
+    <input placeholder="Search..." />
+    <button class='btn add-on'>
+        <i class="icon-search"></i>
+    </button>
+</div>
+ 
+
+
 <hr />
 <table class="table striped">
   <thead>
@@ -13,7 +22,7 @@
         <td><%= book.get('author') %></td>
         <td><%= book.get('status') %></td>
 
-        <td><a class="btn" href="#/edit/<%= book.id %>">Edit</a></td>
+        <td><a class="btn btn-succes0s" href="#/edit/<%= book.id %>">Edit</a></td>
         <td><a class="btn btn-danger delete" href="#" data-id=<%= book.id%>>Delete</a></td>
       </tr>
     <% }); %>

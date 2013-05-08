@@ -1,17 +1,17 @@
 <form class="edit-book-form">
   <legend><%= book ? 'Edit' : 'New' %> book</legend>
     <label>Book Title</label>
-    <input id="title" type="text" value="<%= book ? book.get('title') : '' %>">
+    <input name="title" type="text" value="<%= book ? book.get('title') : '' %>">
     <label>Author</label>
-    <input id="author" type="text" value="<%= book ? book.get('author') : '' %>">
+    <input name="author" type="text" value="<%= book ? book.get('author') : '' %>">
     <label>Status</label>
-    <select id="status">
+    <select name="status">
     <option value="Read">Read</option>
     <option value="Not yet Read">Not yet Read</option>
     </select>
     <hr />
    <button type="submit" class="btn"><%= book ? 'Update' : 'Create' %></button>
-   <% if(book) {flag='true';status=book.get('status'); %>
+   <%flag='false'; if(book) {flag='true';status=book.get('status'); %>
     <input type="hidden" name="id" value="<%= book.id %>" />
    <button data-book-id="<%= book.id %>" class="btn btn-danger delete">Delete</button>
    <% }; %>

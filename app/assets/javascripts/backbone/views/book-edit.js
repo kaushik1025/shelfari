@@ -1,6 +1,34 @@
 var app = app || {};
 $(function($){
 
+  jQuery.fn.serializeObject = function(){  
+    var arrayData, objectData;
+    arrayData = this.serializeArray();
+    objectData = {};
+
+    jQuery.each(arrayData, function() {
+      var value;
+
+      if (this.value != null) {
+        value = this.value;
+      } else {
+        value = '';
+      }
+
+      if (objectData[this.name] != null) {
+        if (!objectData[this.name].push) {
+          objectData[this.name] = [objectData[this.name]];
+        }
+
+        objectData[this.name].push(value);
+      } else {
+        objectData[this.name] = value;
+      }
+    });
+
+    return objectData;
+  },
+
   app.BookEditView = Backbone.View.extend({
     el: '.page',
     template: JST["backbone/templates/edit"],
@@ -8,12 +36,9 @@ $(function($){
       'submit .edit-book-form': 'savebook'
     },
     savebook: function (ev) {
-      console.log("save")
-      var title = $('#title').val();
-      var author = $('#author').val();
-      var status = $('#status').val();
+      var bookDetails = $(ev.currentTarget).serializeObject();
       var book = new app.Book();
-      book.save({title: title, author: author, status: status}, {
+      book.save(bookDetails, {
         success: function (book) {
           console.log("saving...")
           window.location.hash = "";
