@@ -5,12 +5,19 @@ $(function($){
     el: '.page',
     template: JST["backbone/templates/list"],
     events: {
-      'click .delete': 'deletebook',
-      'click .search': 'searchbooks'
+      'click .search': 'searchbooks',
+      'click .all': 'getallbooks'
     },
 
     initialize: function(){
-      this.options.collection.on('remove', this.render, this);  
+        this.collection.on("add", this.render, this);
+        this.collection.on("remove", this.render, this);
+        this.collection.on("reset", this.render, this);
+    },
+
+    getallbooks: function(){
+      var router = new app.Router;
+      router.home();
     },
 
     searchbooks: function(){
@@ -20,13 +27,8 @@ $(function($){
       this.render({search: searchresults});
     },    
 
-    deletebook: function(e){
-      var model = this.options.collection.get($(e.currentTarget).data("id"));
-      model.destroy();
-      this.options.collection.remove(model);
-    },
-
     render: function (options) {
+      console.log("List Render");
       if(options.search){
         console.log(JSON.stringify(options.search))
         this.$el.html(this.template({books: options.search}))                

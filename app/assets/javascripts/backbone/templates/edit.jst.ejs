@@ -10,12 +10,12 @@
     <option value="Not yet Read">Not yet Read</option>
     </select>
     <hr />
-    <button type="submit" class="btn btn-success"><%= book ? 'Update' : 'Create' %></button>
-    <button class="btn btn-info back"><i class="icon-white icon-arrow-left"></i> Back</button>
-
+    <button type="submit" class="btn btn-success save"><%= book ? 'Update' : 'Create' %></button>
     <%flag='false'; if(book) {flag='true';status=book.get('status'); %>
-    <input type="hidden" name="id" value="<%= book.id %>" />
+    <input type="hidden" id="id" name="id" value="<%= book.id %>" />
+    <button class="btn btn-danger delete">Delete</button>    
        <% }; %>
+    <a href="#" class="btn btn-info back"><i class="icon-white icon-arrow-left"></i> Back</a>
 
 </form>
 <script>

@@ -1,23 +1,29 @@
 <style>
-.control-group {
+.search-books {
+  height: 20px;
   float: right;
 }
 </style>
-
+<div class="header">
 <a href="#/new" class="btn btn-primary btn-small"><i class="icon-white icon-plus-sign"></i> Add New Book</a>
 <!-- Search input-->
+<form class="search-books">
 <div class="control-group">
   <div class="controls">
     <input id="searchinput" name="searchinput" type="text" placeholder="search books.." class="input-xlarge search-query">
     <button class="btn btn-success btn-small search">Go <i class="icon-white icon-thumbs-up"></i></button>
+    <a class="btn btn-info btn-small all">All Books</a>
+
 
   </div>
+</div>
+</form>
 </div>
 <hr />
 <table class="table striped">
   <thead>
     <tr>
-      <th>Book Title</th><th>Author</th><th>Title</th><th></th><th></th>
+      <th>Book Title</th><th>Author</th><th>Title</th><th></th>
     </tr>
   </thead>
   <tbody>
@@ -28,7 +34,6 @@
         <td><%= book.get('status') %></td>
 
         <td><a class="btn btn-small" href="#/edit/<%= book.id %>">Edit</a></td>
-        <td><a href="#" class="btn btn-danger btn-small delete" data-id=<%= book.id%>>Delete</a></td>
       </tr>
     <% }); %>
   </tbody>

@@ -4,11 +4,13 @@ $(function($){
   app.Router = Backbone.Router.extend({
         routes: {
           "": "home",
+          "home": "home",
           "edit/:id": "edit",
           "new": "edit",
         },
 
     home: function() {
+      console.log("home route")
       var books = new app.Books();
       books.fetch({
         success: function (books) {
@@ -19,11 +21,12 @@ $(function($){
     },
 
     edit: function(id){
-      var bookEditView = new app.BookEditView();    
+      var bookEditView = new app.BookEditView();         
       bookEditView.render({id: id});
     },
   });
 
+  sessionStorage.setItem('rendered',false);
   new app.Router();
   Backbone.history.start();
 });

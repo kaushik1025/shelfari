@@ -34,34 +34,58 @@ $(function($){
     template: JST["backbone/templates/edit"],
     events: {
       'submit .edit-book-form': 'savebook',
-      'click .back': 'goback',
-      'click .search': 'searchbooks'
+      'click .delete': 'deletebook'
+      // 'click .save': 'savebook'
     },
 
-    goback: function(){
-      window.location.hash = "";
+    initialize: function() {
+        _.bindAll(this, 'cleanup');
     },
 
-    searchbooks: function(){
-      var searchstring = $("#searchinput").val();
-      console.log()
-    },
+    cleanup: function() {
+      console.log("Edit Cleanup");
+        this.undelegateEvents();
+        $(this.el).empty();
+    },    
 
     savebook: function (ev) {
-      var bookDetails = $(ev.currentTarget).serializeObject();
-      var book = new app.Book();
-      book.save(bookDetails, {
-        success: function (book) {
-          console.log("saving...")
-          window.location.hash = "";
+        var bookDetails = $(ev.currentTarget).serializeObject();
+        var book = new app.Book();
+        console.log("to save = "+JSON.stringify(bookDetails))
+        book.save(bookDetails, {
+          success: function (book) {
+            var router = new app.Router;
+            router.navigate('home', {trigger:true});
         }
       });
       return false;
     },
 
+    deletebook: function (ev) {
+      ev.preventDefault();
+      var book = new app.Book({id: $("#id").val()});
+      book.fetch({
+          success: function (book) {
+            console.log("fetched for delete = "+book)
+            book.destroy({
+              success: function(){
+                console.log('destroyed');
+                var router = new app.Router;
+                router.navigate('home', {trigger:true});
+              }
+            });    
+          }
+      })
+    },
+
     render: function (options) {
-      console.log("Edit Render")
+      console.log("Edit Render"+sessionStorage.getItem('rendered'));
       var that = this;
+      if(sessionStorage.getItem('rendered')=='true')
+        this.cleanup();
+      else
+        sessionStorage.setItem('rendered','true');
+
       if(options.id) {
         that.book = new app.Book({id: options.id});
         that.book.fetch({
