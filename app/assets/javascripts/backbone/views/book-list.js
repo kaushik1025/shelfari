@@ -6,7 +6,6 @@ $(function($){
     template: JST["backbone/templates/list"],
     events: {
       'click .search': 'searchbooks',
-      'click .all': 'getallbooks'
     },
 
     initialize: function(){
@@ -15,20 +14,15 @@ $(function($){
         this.collection.on("reset", this.render, this);
     },
 
-    getallbooks: function(){
-      var router = new app.Router;
-      router.home();
-    },
-
-    searchbooks: function(){
+    searchbooks: function(ev){
+      ev.preventDefault();
       var searchstring = $("#searchinput").val();
       var searchresults = Backbone.Collection.extend();
-      searchresults = this.options.collection.search(searchstring);
-      this.render({search: searchresults});
+      var router = new app.Router;
+      router.navigate('search/'+searchstring, {trigger:true});      
     },    
 
     render: function (options) {
-      console.log("List Render");
       if(options.search){
         console.log(JSON.stringify(options.search))
         this.$el.html(this.template({books: options.search}))                

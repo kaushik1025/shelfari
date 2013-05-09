@@ -35,7 +35,6 @@ $(function($){
     events: {
       'submit .edit-book-form': 'savebook',
       'click .delete': 'deletebook'
-      // 'click .save': 'savebook'
     },
 
     initialize: function() {
